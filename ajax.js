@@ -1,14 +1,14 @@
 /* jshint sub: true */
 
-var Promise = require('./promise');
-var _ = require('./fn');
-
+var Promise = require('promiscuous');
 var JSON_TYPE = 'application/json';
 var defaults = {
 	type: 'get',
 	dataType: JSON_TYPE,
 	timeout: 0,
 };
+// promiscuous hack
+if (!window.setImmediate) window.setImmediate = window.setTimeout;
 
 
 module.exports = function(options) {
@@ -18,7 +18,7 @@ module.exports = function(options) {
 	var abortTimeout;
 
 	var promise = new Promise(function(resolve, reject) {
-		options = _.extend({}, defaults, options, {
+		options = extend({}, defaults, options, {
 			resolve: resolve,
 			reject: reject
 		});
@@ -59,7 +59,7 @@ var onStatus = function(xhr, options) {
 	if (xhr.status >= 200 && xhr.status < 300) {
 		onSuccess(xhr, options);
 	}
-    else onError('ajax: unsuccesful request', xhr, options);
+	else onError('ajax: unsuccesful request', xhr, options);
 };
 
 
@@ -100,3 +100,26 @@ var onTimeout = function(xhr, options) {
 	xhr.abort();
 	onError('ajax: timeout exceeded)', xhr, options);
 };
+
+
+function extend() {
+	var args = [].slice.apply(arguments);
+	var dest = args.shift();
+	var source = args.shift();
+	var o = 'object';
+	var k, val;
+
+	for (k in source) {
+		if (source.hasOwnProperty(k)) {
+			val = source[k];
+			if (dest.hasOwnProperty(k) && typeof dest[k] == o && typeof val == o) {
+				extend(dest[k], val);
+			}
+			else dest[k] = val;
+		}
+	}
+
+	if (args.length > 0) dest = extend.apply(null, [dest].concat(args));
+
+	return dest;
+}

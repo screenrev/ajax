@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/screenrev/ajax/issues"
   },
-  "homepage": "https://github.com/screenrev/ajax"
+  "homepage": "https://github.com/screenrev/ajax",
+  "dependencies": {
+    "promiscuous": "0.6.0"
+  }
 }
