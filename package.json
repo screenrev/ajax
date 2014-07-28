@@ -1,0 +1,20 @@
+{
+  "private": true,
+  "name": "ajax",
+  "version": "0.0.0",
+  "description": "ajax ====",
+  "main": "ajax.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/screenrev/ajax"
+  },
+  "author": "glen@screenrev.com",
+  "license": "BSD v2",
+  "bugs": {
+    "url": "https://github.com/screenrev/ajax/issues"
+  },
+  "homepage": "https://github.com/screenrev/ajax"
+}
