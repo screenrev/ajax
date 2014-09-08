@@ -69,6 +69,7 @@ var onSuccess = function(xhr, options) {
 	if (contentType && contentType.indexOf(JSON_TYPE) !== -1) {
 		try {xhr.data = JSON.parse(xhr.response);} catch (err) {}
 	}
+	else xhr.data = xhr.response;
 
 	options.resolve(xhr.data);
 };
